@@ -1,0 +1,47 @@
+[
+    {
+        "code": "en",
+        "id": "0",
+        "name": "English"
+    },
+    {
+        "code": "sr",
+        "id": "1",
+        "name": "Serbian"
+    },
+    {
+        "code": "es",
+        "id": "2",
+        "name": "Spanish"
+    },
+    {
+        "code": "uk",
+        "id": "3",
+        "name": "Ukranian"
+    },
+    {
+        "code": "mk",
+        "id": "4",
+        "name": "Macedonian"
+    },
+    {
+        "code": "sr",
+        "id": "5",
+        "name": "Serbian"
+    },
+    {
+        "code": "hr",
+        "id": "6",
+        "name": "Croatian"
+    },
+    {
+        "code": "ng",
+        "id": "7",
+        "name": "Bulgarian"
+    },
+    {
+        "code": "ro",
+        "id": "8",
+        "name": "Romanian"
+    }
+]
