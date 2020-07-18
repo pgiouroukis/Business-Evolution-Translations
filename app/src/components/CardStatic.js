@@ -17,14 +17,21 @@ export default function SimpleCard(props) {
 					{props.text}
 				</Typography>
 			</CardContent>
-			<Grid container justify="flex-end">
-				<CardActions>
-					{props.translateButton && (
-						<Button variant="outlined" color="primary">
-							Google Translate It.
-						</Button>
-					)}
-				</CardActions>
+			<Grid container spacing={3}>
+				<Grid item xs={12} sm={5} md={6} justify="center">
+					<CardActions>
+						<Typography>Code: {props.code}</Typography>
+					</CardActions>
+				</Grid>
+				<Grid item xs={12} sm={5} md={6} justify="flex-end">
+					<CardActions>
+						{props.translateButton && (
+							<Button variant="outlined" color="primary">
+								Google Translate It.
+							</Button>
+						)}
+					</CardActions>
+				</Grid>
 			</Grid>
 		</Card>
 	);

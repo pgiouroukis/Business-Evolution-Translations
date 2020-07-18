@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 //general imports
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import PrimarySearchAppBar from "./components/Navbar";
 
 import CardStatic from "./components/CardStatic";
@@ -31,17 +28,27 @@ const useStyles = makeStyles({
 });
 
 function App() {
-	var list = ["keimenaki 1", "keimanki 2", "keimanaki 3"];
+
+    var list = ["keimenaki 1", "keimanki 2", "keimanaki 3"];
+    var [records, setRecords] = useState([])
+
+    useEffect(() => {
+        fetch("http://pgiouroukis.semantic.gr:9000/listAll")
+		.then((response) => response.json())
+		.then((data) => {
+            setRecords(data)
+        });        
+    } , [] )
 
 	return (
 		<div className="App">
 			<PrimarySearchAppBar />
-			{list.map((val) => {
+			{records.map((record) => {
 				return (
 					<Grid container spacing={3}>
 						<Grid item sm={1}></Grid>
 						<Grid item sm={4} xs={12}>
-							<CardStatic text={val} translateButton={true} />
+							<CardStatic text={record.str} translateButton={true} code={record.code} />
 						</Grid>
 						<Grid item sm={1}></Grid>
 
