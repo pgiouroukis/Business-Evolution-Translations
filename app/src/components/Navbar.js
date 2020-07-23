@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -17,10 +16,12 @@ import languages from "../media/languages.json";
 export default function ButtonAppBar() {
 	const classes = useStyles();
 
-	const [selectVal, setSelectVal] = useState(90);
+	const [selectVal, setSelectVal] = useState(sessionStorage.getItem("languageId"));
 
 	const handleChange = (event) => {
-		setSelectVal(event.target.value);
+        sessionStorage.setItem("languageId", event.target.value);
+        setSelectVal(event.target.value);
+        window.location.reload();
 	};
 
 	useEffect(() => {}, [selectVal]);
@@ -45,13 +46,13 @@ export default function ButtonAppBar() {
 						<InputLabel id="demo-simple-select-label">Language</InputLabel>
 						<Select
 							onChange={handleChange}
-							defaultValue={0}
+							defaultValue={selectVal}
 							labelId="demo-simple-select-label"
 							id="demo-simple-select"
 						>
 							{languages &&
 								languages.map((lang) => {
-									return <MenuItem value={lang.id}>{lang.name}</MenuItem>;
+									return <MenuItem key={lang.id} value={lang.id}>{lang.name}</MenuItem>;
 								})}
 						</Select>
 					</FormControl>

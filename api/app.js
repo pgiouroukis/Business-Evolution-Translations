@@ -6,7 +6,8 @@ var logger = require('morgan');
 var cors = require("cors");
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var listRoute = require('./routes/list');
+var addTranslation = require("./routes/addTranslation");
 
 const { MongoClient } = require("mongodb");
 const url = "mongodb://localhost:27017:beTranslations";
@@ -32,7 +33,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/listAll', usersRouter);
+app.use('/list', listRoute);
+app.use('/addTranslation', addTranslation)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
