@@ -8,7 +8,7 @@ import CardDynamic from "./CardDynamic";
 export default function RowCard(props) {
 
 	return (
-		<Grid container spacing={3}>
+		<Grid container spacing={0}>
 			<Grid item sm={1}></Grid>
 			<Grid item sm={4} xs={12}>
 				<CardStatic
