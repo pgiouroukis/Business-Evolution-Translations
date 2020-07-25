@@ -1,7 +1,7 @@
 import React from "react";
 
 var style = {
-	backgroundColor: "rgba(255, 0, 0, 0.01);",
+	backgroundColor: "rgba(255, 0, 0, 0.01)",
 	textAlign: "center",
 	position: "fixed",
 	left: "0",

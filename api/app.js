@@ -7,7 +7,10 @@ var cors = require("cors");
 
 var indexRouter = require('./routes/index');
 var listRoute = require('./routes/list');
+var listAllRoute = require('./routes/listAll');
+var count = require("./routes/count");
 var addTranslation = require("./routes/addTranslation");
+var googleTranslate = require("./routes/googleTranslate");
 
 const { MongoClient } = require("mongodb");
 const url = "mongodb://localhost:27017:beTranslations";
@@ -16,10 +19,10 @@ const url = "mongodb://localhost:27017:beTranslations";
 
 var app = express();
 
-MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
-    app.locals.db = db;
-})
+MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+	if (err) throw err;
+	app.locals.db = db;
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,7 +37,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/list', listRoute);
+app.use("/listAll", listAllRoute);
+app.use("/count", count);
 app.use('/addTranslation', addTranslation)
+app.use("/googleTranslate", googleTranslate);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

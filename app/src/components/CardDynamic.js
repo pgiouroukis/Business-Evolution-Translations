@@ -8,24 +8,20 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
-//icons
-import DoneIcon from "@material-ui/icons/Done";
-import RemoveIcon from "@material-ui/icons/Remove";
-import SaveIcon from "@material-ui/icons/Save";
-
 export default function SimpleCard(props) {
 	const classes = useStyles();
 
     var [val, setVal] = useState(props.val || "")
-    var [icon, setIcon] = useState(<div></div>);
+    var [icon, setIcon] = useState("");
+
 
     useEffect(() => {
         if (props.val === "" || (props.val === undefined && val === "")) 
-            {setIcon(<RemoveIcon style={{ color: "gray" }} fontSize="large" />); return}
+            {setIcon("❌"); return} //<RemoveIcon style={{ color: "gray" }} fontSize="large" />
         if (val === props.val) 
-            {setIcon(<DoneIcon style={{ color: "green" }} fontSize="large" />); return}
+            {setIcon("✔️"); return} //<DoneIcon style={{ color: "green" }} fontSize="large" />
         if (val !== props.val || (props.val === undefined && val !== "")) 
-            {setIcon(<SaveIcon style={{ color: "gray" }} fontSize="large" />); return}
+            {setIcon("💾"); return} //<SaveIcon style={{ color: "gray" }} fontSize="large" />
     } , [val, props.val])
 
     function handleSave() {
@@ -39,7 +35,7 @@ export default function SimpleCard(props) {
         })
         .then((response) => response.json())
         .then((data) => {
-            setIcon(<DoneIcon style={{ color: "green" }} fontSize="large" />);
+            setIcon("✔️");
         });        
 
     }
@@ -62,7 +58,7 @@ export default function SimpleCard(props) {
 			</CardContent>
 			<Grid container spacing={3}>
 				<Grid item container xs={12} sm={5} md={6} justify="flex-start">
-					<CardActions>{icon}</CardActions>
+					<CardActions><Typography variant="h4">{icon}</Typography></CardActions>
 				</Grid>
 				<Grid item container xs={12} sm={5} md={6} justify="flex-end">
 					<CardActions>

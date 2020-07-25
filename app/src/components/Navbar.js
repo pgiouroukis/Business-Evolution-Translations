@@ -3,20 +3,21 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 
+//general imports
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
+//custom components and media
+import NavbarDrawer from "../components/NavbarDrawer"
 import languages from "../media/languages.json";
 
 export default function ButtonAppBar() {
 	const classes = useStyles();
 
-	const [selectVal, setSelectVal] = useState(sessionStorage.getItem("languageId"));
+    const [selectVal, setSelectVal] = useState(sessionStorage.getItem("languageId"));
 
 	const handleChange = (event) => {
         sessionStorage.setItem("languageId", event.target.value);
@@ -28,16 +29,10 @@ export default function ButtonAppBar() {
 
 	return (
 		<div className={classes.root}>
-			<AppBar position="static">
+			<AppBar position="fixed">
 				<Toolbar>
-					<IconButton
-						edge="start"
-						className={classes.menuButton}
-						color="inherit"
-						aria-label="menu"
-					>
-						<MenuIcon />
-					</IconButton>
+					<NavbarDrawer />
+                    <Typography>Current Page: {sessionStorage.getItem("page")}</Typography>
 					<Typography variant="h6" className={classes.title}>
 						Business Evolution Translate
 					</Typography>
@@ -52,7 +47,11 @@ export default function ButtonAppBar() {
 						>
 							{languages &&
 								languages.map((lang) => {
-									return <MenuItem key={lang.id} value={lang.id}>{lang.name}</MenuItem>;
+									return (
+										<MenuItem key={lang.id} value={lang.id}>
+											{lang.name}
+										</MenuItem>
+									);
 								})}
 						</Select>
 					</FormControl>
