@@ -22,7 +22,7 @@ export default function TemporaryDrawer() {
     const [batchSize, setBatchSize] = useState(parseInt(sessionStorage.getItem("batch")) || 100);
 
     useEffect(() => {
-        fetch("http://pgiouroukis.semantic.gr:9000/listAllForeign/" + sessionStorage.getItem("startingLanguageCode"))
+        fetch("http://pgiouroukis.semantic.gr:9000/listAllForeign/" + (sessionStorage.getItem("startingLanguageCode") || "str"))
 		.then((response) => response.json())
 		.then((data) => {
             var list = [];
@@ -44,9 +44,11 @@ export default function TemporaryDrawer() {
             }
             if (count%batch)
                 list.push({"page" : String(i + 1), "full" : false, "progress" : ""}); //last list item that contains fewer literals
+
+            console.log(list)
             setListItems(list)
         });               
-    },[])
+    }, [])
 
 	const toggleDrawer = (anchor, open) => (event) => {
 		if ( event.type === "keydown" &&(event.key === "Tab" || event.key === "Shift")) return;
@@ -66,7 +68,7 @@ export default function TemporaryDrawer() {
 							Batch:{"   "}
 						</Grid>
 						<Grid item container xs={2} sm={2}>
-							<Input variant="filled" onChange={(e)=>{setBatchSize(e.target.value)}} value={batchSize} fullWidth id="standard-basic" label="Standard" />
+							<Input variant="filled" onChange={(e)=>{setBatchSize(e.target.value)}} value={batchSize||0} fullWidth id="standard-basic" label="Standard" />
 						</Grid>
                         <Grid item container xs={2} sm={2}></Grid>
 						<Grid item container xs={4} sm={4} justify={"flex-end"}>

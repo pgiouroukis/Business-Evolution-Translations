@@ -40,7 +40,7 @@ export default function ButtonAppBar() {
 						<InputLabel  id="demo-simple-select-label">Language</InputLabel>
 						<Select
 							onChange={handleChange}
-							defaultValue={selectVal}
+							defaultValue={selectVal||"0"}
 							labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             style={{color:"white"}}

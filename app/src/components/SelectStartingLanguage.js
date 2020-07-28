@@ -27,8 +27,9 @@ export default function SimpleSelect() {
 				<Select
 					labelId="demo-simple-select-filled-label"
 					id="demo-simple-select-filled"
-					defaultValue={sessionStorage.getItem("startingLanguageCode") || "str"}
-					onClick={(e) => {
+                    defaultValue={sessionStorage.getItem("startingLanguageCode") || "str"}
+                    onClose={()=>{console.log()}}
+					onChange={(e) => {
 						sessionStorage.setItem("startingLanguageCode", e.target.value );
 						window.location.reload();
 					}}
