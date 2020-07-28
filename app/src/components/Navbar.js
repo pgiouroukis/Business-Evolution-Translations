@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -9,6 +9,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import Box from "@material-ui/core/Box";
 
 //custom components and media
 import NavbarDrawer from "../components/NavbarDrawer"
@@ -25,8 +26,6 @@ export default function ButtonAppBar() {
         window.location.reload();
 	};
 
-	useEffect(() => {}, [selectVal]);
-
 	return (
 		<div className={classes.root}>
 			<AppBar position="fixed">
@@ -34,16 +33,17 @@ export default function ButtonAppBar() {
 					<NavbarDrawer />
                     <Typography>Current Page: {sessionStorage.getItem("page")}</Typography>
 					<Typography variant="h6" className={classes.title}>
-						Business Evolution Translate
+						<Box display={{ xs: 'none', sm: 'block', md: 'block' }}>Business Evolution Translate</Box>
 					</Typography>
 
 					<FormControl className={classes.formControl}>
-						<InputLabel id="demo-simple-select-label">Language</InputLabel>
+						<InputLabel  id="demo-simple-select-label">Language</InputLabel>
 						<Select
 							onChange={handleChange}
 							defaultValue={selectVal}
 							labelId="demo-simple-select-label"
-							id="demo-simple-select"
+                            id="demo-simple-select"
+                            style={{color:"white"}}
 						>
 							{languages &&
 								languages.map((lang) => {
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	formControl: {
 		margin: theme.spacing(1),
-		minWidth: 120,
+        minWidth: 120
 	},
 	selectEmpty: {
 		marginTop: theme.spacing(2),

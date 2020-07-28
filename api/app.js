@@ -8,6 +8,8 @@ var cors = require("cors");
 var indexRouter = require('./routes/index');
 var listRoute = require('./routes/list');
 var listAllRoute = require('./routes/listAll');
+var listForeign = require("./routes/listForeign");
+var listAllForeign = require("./routes/listAllForeign");
 var count = require("./routes/count");
 var addTranslation = require("./routes/addTranslation");
 var googleTranslate = require("./routes/googleTranslate");
@@ -38,6 +40,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/list', listRoute);
 app.use("/listAll", listAllRoute);
+app.use("/listForeign", listForeign);
+app.use("/listAllForeign", listAllForeign);
 app.use("/count", count);
 app.use('/addTranslation', addTranslation)
 app.use("/googleTranslate", googleTranslate);

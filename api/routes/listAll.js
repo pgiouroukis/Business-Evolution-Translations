@@ -3,8 +3,6 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get("", async function (req, res, next) {
-	const amount = parseInt(req.params.amount);
-	const batch = parseInt(req.params.batch);
 
 	var db = req.app.locals.db.db("beTranslations").collection("demoCollection");
 

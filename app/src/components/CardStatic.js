@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -10,10 +10,6 @@ import Grid from "@material-ui/core/Grid";
 export default function SimpleCard(props) {
 	const classes = useStyles();
     
-    useEffect(() => {
-        console.log("only rendered one")
-    })
-
     function handleClick() {
         fetch("http://pgiouroukis.semantic.gr:9000/googleTranslate", {
 					method: "POST",
@@ -40,21 +36,19 @@ export default function SimpleCard(props) {
 					{props.text}
 				</Typography>
 			</CardContent>
-			<Grid container spacing={3}>
-				<Grid item xs={12} sm={5} md={6}>
+			<Grid container>
+				<Grid item xs={6} sm={6} md={6}>
 					<CardActions>
 						<Typography>Code: {props.code}</Typography>
 					</CardActions>
 				</Grid>
-				<Grid item container xs={12} sm={5} md={6} justify="flex-end">
+				<Grid item container xs={6} sm={6} md={6} justify="flex-end">
 					<CardActions>
 						{props.translateButton && (
-							<Button variant="outlined" color="primary" 
-                                    onClick={handleClick}
-                            >
-								Google Translate It.
+							<Button variant="outlined" color="primary" onClick={handleClick}>
+								Translate
 							</Button>
-						)}
+                        )}
 					</CardActions>
 				</Grid>
 			</Grid>

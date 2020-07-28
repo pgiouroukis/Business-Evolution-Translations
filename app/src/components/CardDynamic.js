@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -6,23 +6,23 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import Box from "@material-ui/core/Box";
+import TextareaAutosize from "react-textarea-autosize";
 
 export default function SimpleCard(props) {
 	const classes = useStyles();
 
     var [val, setVal] = useState(props.val || "")
-    var [icon, setIcon] = useState("");
+    var [icon, setIcon] = useState(props.val !== undefined ? "✔️" : "❌");
 
-
-    useEffect(() => {
+    const updateIcons = ((val) => {
         if (props.val === "" || (props.val === undefined && val === "")) 
             {setIcon("❌"); return} //<RemoveIcon style={{ color: "gray" }} fontSize="large" />
         if (val === props.val) 
             {setIcon("✔️"); return} //<DoneIcon style={{ color: "green" }} fontSize="large" />
         if (val !== props.val || (props.val === undefined && val !== "")) 
             {setIcon("💾"); return} //<SaveIcon style={{ color: "gray" }} fontSize="large" />
-    } , [val, props.val])
+    })
 
     function handleSave() {
         fetch("http://pgiouroukis.semantic.gr:9000/addTranslation/" + props.code + "/" + sessionStorage.getItem("languageCode"), {
@@ -36,6 +36,7 @@ export default function SimpleCard(props) {
         .then((response) => response.json())
         .then((data) => {
             setIcon("✔️");
+            return;
         });        
 
     }
@@ -45,22 +46,33 @@ export default function SimpleCard(props) {
 			<CardContent>
 				<Typography variant="h5" component="h2">
 					<TextareaAutosize
-                        variant="filled"
-						style={{ width: "50%", color: (props.val === undefined || props.val!== val ? "black" : "green") }}
+						rows={1}
+						variant="filled"
+						style={{
+							fontSize: "25px",
+							width: "80%",
+							color:
+								props.val === undefined || props.val !== val
+									? "black"
+									: "green",
+						}}
 						aria-label="empty textarea"
 						placeholder="Empty"
 						value={val}
 						onChange={(e) => {
 							setVal(e.target.value);
+							updateIcons(e.target.value);
 						}}
 					/>
 				</Typography>
 			</CardContent>
-			<Grid container spacing={3}>
-				<Grid item container xs={12} sm={5} md={6} justify="flex-start">
-					<CardActions><Typography variant="h4">{icon}</Typography></CardActions>
+			<Grid container>
+				<Grid item container xs={6} sm={6} md={6} justify="flex-start">
+					<CardActions>
+						<Typography variant="h4">{icon}</Typography>
+					</CardActions>
 				</Grid>
-				<Grid item container xs={12} sm={5} md={6} justify="flex-end">
+				<Grid item container xs={6} sm={6} md={6} justify="flex-end">
 					<CardActions>
 						{props.translateButton && (
 							<Button variant="outlined" color="primary">
@@ -69,7 +81,10 @@ export default function SimpleCard(props) {
 						)}
 						{props.saveButton && (
 							<Button variant="outlined" color="primary" onClick={handleSave}>
-								Save Translation.
+								Save{"\u00A0"}
+								<Box display={{ xs: "none", sm: "block", md: "block" }}>
+									Translation.{" "}
+								</Box>
 							</Button>
 						)}
 					</CardActions>
