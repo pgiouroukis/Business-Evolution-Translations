@@ -8,4 +8,4 @@ Import your own languages as a json to /app/src/media/languages.json using the I
 
 You will have to connect the backend to your own mongodb instance for it to run.
 
-To connect it with google translate API, you will need to get your own api key from google cloud platform.
+To connect it with Google Translate API, you will need to get your own api key from google cloud platform.
